@@ -1,38 +1,25 @@
-# Supabase Self-Hosted Template
+# Chronotrail ⛰️
 
-Template prêt-à-l'emploi pour lancer un Supabase self-hosted.
+> Ton chrono de trail, avant la course.
 
-## Installation rapide
+Chronotrail est une web app gratuite et open-source qui prédit ton temps de course sur trail à partir d'un fichier GPX. Upload ton parcours, renseigne ton allure de référence sur plat, et obtiens une prédiction de temps avec un plan de splits détaillé.
 
-```bash
-# 1. Clone ce template
-git clone <this-repo> mon-projet
-cd mon-projet
+## Comment ça marche
 
-# 2. Copie le .env et génère tes secrets
-cp .env.example .env
-sh ./utils/generate-keys.sh
-sh ./utils/add-new-auth-keys.sh
+Chronotrail utilise le modèle **km-effort** (popularisé par l'UTMB) : chaque 100 m de dénivelé positif équivaut à 1 km de plat. Un trail de 20 km avec 800 m D+ correspond donc à 28 km-effort. Multiplié par ton allure de référence, ça donne ton temps prédit.
 
-# 3. Génère les autres secrets manuellement
-# POSTGRES_PASSWORD, DASHBOARD_PASSWORD, SECRET_KEY_BASE, VAULT_ENC_KEY, 
-# PG_META_CRYPTO_KEY, LOGFLARE_*, S3_PROTOCOL_*
-# (voir les openssl rand dans la doc)
+Simple, explicable, sans boîte noire.
 
-# 4. Lance
-docker compose up -d
-```
+## Stack
 
-## Accès
+- **Next.js 15** (App Router)
+- **Tailwind CSS** + **shadcn/ui**
+- **Phosphor Icons**
+- Parsing GPX côté client, zéro backend pour la V1
 
-- Studio : http://localhost:8000 (login défini dans .env)
-- API : http://localhost:8000
-- Postgres : localhost:5432
+## Roadmap
 
-## Reset complet
-
-```bash
-docker compose down -v
-rm -rf volumes/db/data volumes/storage volumes/pooler
-docker compose up -d
-```
+- [x] V1 : Upload GPX + km-effort + splits
+- [ ] Carte interactive + profil altimétrique
+- [ ] Connexion Strava pour calibration auto
+- [ ] Modèle personnalisé basé sur l'historique
