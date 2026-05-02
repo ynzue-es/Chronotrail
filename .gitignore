@@ -1,5 +1,64 @@
-supabase/volumes/db/data
-supabase/volumes/storage
+# === Dependencies ===
+node_modules/
+.pnp/
+.pnp.js
+.yarn/install-state.gz
+
+# === Next.js ===
+web/.next/
+web/out/
+web/build/
+web/dist/
+
+# === Production builds ===
+*.tsbuildinfo
+next-env.d.ts
+
+# === Environment variables ===
 .env
-test.http
-docker-compose.override.yml
+.env.local
+.env.*.local
+!.env.example
+
+# === Supabase ===
+# Secrets (.env contient les passwords/JWT)
+supabase/.env
+supabase/.env.*
+!supabase/.env.example
+
+# Données persistantes (DB, Storage, logs) - JAMAIS dans Git
+supabase/volumes/db/data/
+supabase/volumes/storage/
+supabase/volumes/logs/
+supabase/volumes/api/
+supabase/volumes/functions/
+
+# Si tu veux ignorer TOUT volumes/ (recommandé) :
+supabase/volumes/
+
+# === Logs ===
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# === IDE / Editors ===
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# === Testing ===
+coverage/
+*.lcov
+.nyc_output
+
+# === Misc ===
+.cache/
+.turbo/
+.vercel/
+
+# === TypeScript ===
+*.tsbuildinfo
