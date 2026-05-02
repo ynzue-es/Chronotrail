@@ -535,6 +535,8 @@ services:
       - ./volumes/db/pooler.sql:/docker-entrypoint-initdb.d/migrations/99-pooler.sql:Z
       # Use named volume to persist pgsodium decryption key between restarts
       - db-config:/etc/postgresql-custom
+    ports:
+      - "127.0.0.1:54322:5432"
     healthcheck:
       test:
         [
