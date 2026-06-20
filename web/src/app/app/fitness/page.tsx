@@ -50,7 +50,7 @@ export default async function FitnessPage() {
                     Allure de référence (profil)
                   </p>
                   <p className="text-2xl font-semibold tracking-tight tabular-nums">
-                    {profilePace ? formatPace(profilePace) : "—"}
+                    {profilePace ? formatPace(profilePace) : "-"}
                   </p>
                   <p className="mt-0.5 flex items-center gap-1 text-[11px] text-muted-foreground">
                     <PathIcon size={11} weight="duotone" />

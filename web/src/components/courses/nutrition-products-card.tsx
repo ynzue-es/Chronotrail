@@ -107,7 +107,7 @@ export function NutritionProductsCard({
 
       <div className="flex flex-col gap-1.5">
         <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-          Catalogue {favProducts.length === 0 && "— choisis tes favoris ★"}
+          Catalogue {favProducts.length === 0 && "· choisis tes favoris ★"}
         </span>
         {products.map((p) => {
           const fav = favorites.has(p.id)

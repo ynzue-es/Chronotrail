@@ -88,12 +88,12 @@ export default async function DashboardPage() {
         <StatCard
           icon={<TimerIcon size={18} weight="duotone" />}
           label="Temps total estimé"
-          value={count > 0 ? formatDuration(totalTime) : "—"}
+          value={count > 0 ? formatDuration(totalTime) : "-"}
         />
         <StatCard
           icon={<MountainsIcon size={18} weight="duotone" />}
           label="D+ cumulé"
-          value={count > 0 ? `+${formatElevation(totalGain)}` : "—"}
+          value={count > 0 ? `+${formatElevation(totalGain)}` : "-"}
         />
       </div>
 
@@ -139,12 +139,12 @@ export default async function DashboardPage() {
                       <span className="hidden sm:inline">
                         {c.distance_m != null
                           ? formatDistance(c.distance_m)
-                          : "—"}
+                          : "-"}
                       </span>
                       <span className="font-medium text-foreground">
                         {c.predicted_time_s != null
                           ? formatDuration(c.predicted_time_s)
-                          : "—"}
+                          : "-"}
                       </span>
                       <CaretRightIcon size={12} weight="bold" />
                     </span>

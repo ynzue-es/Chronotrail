@@ -41,7 +41,7 @@ function timeAtDist(
 
 /**
  * Découpe la course en étapes entre ravitos et calcule, pour chacune, le temps,
- * le D+/D-, et les ressources à emporter (glucides/eau) — la "gestion des
+ * le D+/D-, et les ressources à emporter (glucides/eau) : la "gestion des
  * ressources" entre deux points de ravitaillement.
  */
 export function computeLegs(

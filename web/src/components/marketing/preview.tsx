@@ -14,7 +14,7 @@ export function Preview() {
           </h2>
           <p className="mx-auto max-w-xl text-muted-foreground">
             Un plan de course lisible et complet : temps prédit, profil
-            altimétrique, splits et nutrition — généré en quelques secondes.
+            altimétrique, splits et nutrition, généré en quelques secondes.
           </p>
         </Reveal>
 

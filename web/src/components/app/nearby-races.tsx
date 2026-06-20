@@ -96,7 +96,7 @@ export function NearbyRaces({ races }: { races: Race[] }) {
           {status === "loading"
             ? "Localisation…"
             : status === "denied"
-              ? "Géoloc refusée — courses triées par date"
+              ? "Géoloc refusée : courses triées par date"
               : "Activer la géoloc pour voir les plus proches"}
         </button>
       )}
@@ -169,7 +169,7 @@ export function NearbyRaces({ races }: { races: Race[] }) {
       </div>
 
       <p className="text-[11px] text-muted-foreground">
-        Dates indicatives — vérifie le site officiel de chaque course.
+        Dates indicatives : vérifie le site officiel de chaque course.
       </p>
     </div>
   )

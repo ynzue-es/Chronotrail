@@ -36,7 +36,7 @@ export default async function SimulatorPage({
   return (
     <>
       <PageHeader
-        title={`Simulateur — ${course.name}`}
+        title={`Simulateur · ${course.name}`}
         description="Joue avec tes apports, la chaleur et l'allure : vois quand tu craques."
         action={
           <Link

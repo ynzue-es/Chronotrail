@@ -77,7 +77,7 @@ export default async function AdminUsersPage({ searchParams }: PageProps) {
                         />
                         <div className="min-w-0">
                           <p className="truncate font-medium">
-                            {u.fullName ?? "—"}
+                            {u.fullName ?? "-"}
                           </p>
                           <p className="truncate text-xs text-muted-foreground">
                             {u.email}

@@ -157,7 +157,7 @@ export function OnboardingWizard({
                   </div>
                   <p className="text-xs text-muted-foreground">
                     Ton allure tranquille sur du plat (format m:ss). Sert de base
-                    à tes prédictions — tu pourras l&apos;ajuster à tout moment.
+                    à tes prédictions. Tu pourras l&apos;ajuster à tout moment.
                   </p>
                 </div>
               </div>

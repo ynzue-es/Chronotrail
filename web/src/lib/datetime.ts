@@ -1,6 +1,6 @@
 /** "il y a X min/h/j" from an ISO timestamp. */
 export function timeAgo(iso: string | null): string {
-  if (!iso) return "—"
+  if (!iso) return "-"
   const diff = Date.now() - new Date(iso).getTime()
   const min = Math.floor(diff / 60000)
   if (min < 1) return "à l'instant"
@@ -13,7 +13,7 @@ export function timeAgo(iso: string | null): string {
 
 /** Short localized date, e.g. "20 juin 2026". */
 export function formatDate(iso: string | null): string {
-  if (!iso) return "—"
+  if (!iso) return "-"
   return new Date(iso).toLocaleDateString("fr-FR", {
     day: "2-digit",
     month: "short",

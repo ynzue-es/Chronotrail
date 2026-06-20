@@ -153,13 +153,13 @@ export function RaceSimulator({
   // Statut courant lisible.
   const status =
     cur.hydration < 15
-      ? { txt: "Déshydratation sévère — danger", color: "text-destructive" }
+      ? { txt: "Déshydratation sévère : danger", color: "text-destructive" }
       : cur.energy < 15
         ? { txt: "Fringale : tu passes en mode marche pour tenir", color: "text-amber-600" }
         : cur.hydration < 40
-          ? { txt: "Déshydratation — ça ralentit, bois", color: "text-amber-600" }
+          ? { txt: "Déshydratation : ça ralentit, bois", color: "text-amber-600" }
           : cur.energy < 30
-            ? { txt: "Coup de mou — ravitaille-toi", color: "text-amber-600" }
+            ? { txt: "Coup de mou : ravitaille-toi", color: "text-amber-600" }
             : cur.freshness < 35
               ? { txt: "Jambes entamées (descentes)", color: "text-amber-600" }
               : { txt: "Ça roule", color: "text-primary" }
@@ -179,8 +179,8 @@ export function RaceSimulator({
           <div>
             {result.cause === "barrière horaire" ? (
               <>
-                <strong>Hors délai à {formatDuration(result.abandonAtS!)}</strong>{" "}
-                — tu n&apos;es qu&apos;à km{" "}
+                <strong>Hors délai à {formatDuration(result.abandonAtS!)}</strong>
+                {" : "}tu n&apos;es qu&apos;à km{" "}
                 {((result.abandonDistM ?? 0) / 1000).toFixed(1)} à la barrière.
                 Va plus vite, allège le parcours, ou repousse la barrière.
               </>
@@ -189,7 +189,7 @@ export function RaceSimulator({
                 <strong>
                   Abandon probable vers {formatDuration(result.abandonAtS!)}
                 </strong>{" "}
-                (≈ km {((result.abandonDistM ?? 0) / 1000).toFixed(1)}) —
+                (≈ km {((result.abandonDistM ?? 0) / 1000).toFixed(1)}) :
                 déshydratation sévère. Bois davantage.
               </>
             )}
@@ -404,7 +404,7 @@ export function RaceSimulator({
       <p className="text-[11px] text-muted-foreground">
         Modèle illustratif : on suit la réserve de glycogène (≈ 450 g) et le
         déficit hydrique. Si le glycogène chute, tu ralentis (mode marche) au
-        lieu d&apos;abandonner — l&apos;abandon vient d&apos;une barrière horaire
+        lieu d&apos;abandonner. L&apos;abandon vient d&apos;une barrière horaire
         dépassée ou d&apos;une déshydratation sévère. Pas un avis médical.
       </p>
 
@@ -416,7 +416,7 @@ export function RaceSimulator({
         <ul className="list-disc space-y-0.5 pl-4">
           <li>
             Réserve de glycogène ~400-500 g, conso ~100-120 g/h à intensité
-            soutenue, épargnée par les graisses quand on ralentit —{" "}
+            soutenue, épargnée par les graisses quand on ralentit.{" "}
             <a
               href="https://www.trainingpeaks.com/blog/the-importance-of-carbohydrates-and-glycogen-for-athletes/"
               target="_blank"
@@ -436,14 +436,14 @@ export function RaceSimulator({
             </a>
           </li>
           <li>
-            Apport glucidique 30-90 g/h (cap d&apos;oxydation) —{" "}
+            Apport glucidique 30-90 g/h (cap d&apos;oxydation).{" "}
             <a
               href="https://usecadence.com/blogs/science/carbohydrate-fuel-guide"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              Cadence — Carbohydrate Fuel Guide
+              Cadence · Carbohydrate Fuel Guide
             </a>
           </li>
           <li>Déshydratation : perte &gt; 2 % du poids = baisse de perf ; sévère vers 8-10 %.</li>
