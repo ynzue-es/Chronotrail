@@ -1,31 +1,72 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { GithubLogoIcon } from "@phosphor-icons/react/dist/ssr"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Logo } from "@/components/brand/logo"
+import { cn } from "@/lib/utils"
 
 export function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  // Over the photo hero (top) the header is transparent with light text;
+  // once scrolled it turns into the usual solid, blurred bar.
+  const onHero = !scrolled
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border/40 bg-background/80 backdrop-blur">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+        scrolled
+          ? "border-b border-border/40 bg-background/80 backdrop-blur"
+          : "border-b border-transparent bg-transparent"
+      )}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <div className="flex items-center gap-2">
-          <Logo size={24} className="text-primary" />
-          <span className="font-semibold tracking-tight">Chronotrail</span>
+          <Logo size={24} className={onHero ? "text-white" : "text-primary"} />
+          <span
+            className={cn(
+              "font-semibold tracking-tight transition-colors",
+              onHero ? "text-white" : "text-foreground"
+            )}
+          >
+            Chronotrail
+          </span>
         </div>
 
-        <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
-          <a href="#features" className="hover:text-foreground transition-colors">
+        <nav
+          className={cn(
+            "hidden items-center gap-6 text-sm transition-colors md:flex",
+            onHero ? "text-white/80" : "text-muted-foreground"
+          )}
+        >
+          <a href="#features" className={onHero ? "hover:text-white" : "hover:text-foreground"}>
             Fonctionnalités
           </a>
-          <a href="#how" className="hover:text-foreground transition-colors">
+          <a href="#how" className={onHero ? "hover:text-white" : "hover:text-foreground"}>
             Comment ça marche
           </a>
-          <a href="#pricing" className="hover:text-foreground transition-colors">
+          <a href="#pricing" className={onHero ? "hover:text-white" : "hover:text-foreground"}>
             Tarifs
           </a>
         </nav>
 
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" asChild className="size-9">
+        <div className={cn("flex items-center gap-2", onHero && "text-white")}>
+          <Button
+            variant="ghost"
+            size="icon"
+            asChild
+            className={cn("size-9", onHero && "text-white hover:bg-white/15 hover:text-white")}
+          >
             <a
               href="https://github.com"
               target="_blank"
@@ -36,12 +77,15 @@ export function SiteHeader() {
             </a>
           </Button>
           <ThemeToggle />
-          <div className="mx-1 h-5 w-px bg-border" />
+          <div className={cn("mx-1 h-5 w-px", onHero ? "bg-white/30" : "bg-border")} />
           <Button
             variant="ghost"
             size="sm"
-            className="hidden sm:inline-flex"
             asChild
+            className={cn(
+              "hidden sm:inline-flex",
+              onHero && "text-white hover:bg-white/15 hover:text-white"
+            )}
           >
             <a href="/auth/login">Connexion</a>
           </Button>

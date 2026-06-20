@@ -1,10 +1,12 @@
 import { SiteHeader } from "@/components/marketing/site-header"
 import { SiteFooter } from "@/components/marketing/site-footer"
 import { Hero } from "@/components/marketing/hero"
+import { Preview } from "@/components/marketing/preview"
 import { HowItWorks } from "@/components/marketing/how-it-works"
 import { Features } from "@/components/marketing/features"
 import { StravaNote } from "@/components/marketing/strava-note"
 import { Pricing } from "@/components/marketing/pricing"
+import { PhotoCta } from "@/components/marketing/photo-cta"
 
 export default function LandingPage() {
   return (
@@ -12,10 +14,12 @@ export default function LandingPage() {
       <SiteHeader />
       <main className="flex-1">
         <Hero />
+        <Preview />
         <HowItWorks />
         <Features />
         <StravaNote />
         <Pricing />
+        <PhotoCta />
       </main>
       <SiteFooter />
     </div>
