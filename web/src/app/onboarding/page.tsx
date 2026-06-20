@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { AuthLayout } from "@/components/auth/auth-layout"
-import { OnboardingForm } from "@/components/auth/onboarding-form"
+import { OnboardingWizard } from "@/components/auth/onboarding-wizard"
 
 export const metadata = {
   title: "Bienvenue · Chronotrail",
@@ -43,11 +43,7 @@ export default async function OnboardingPage({ searchParams }: PageProps) {
 
   return (
     <AuthLayout>
-      <OnboardingForm
-        next={next}
-        defaultFirst={defaultFirst}
-        defaultLast={defaultLast}
-      />
+      <OnboardingWizard defaultFirst={defaultFirst} defaultLast={defaultLast} />
     </AuthLayout>
   )
 }
