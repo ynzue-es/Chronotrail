@@ -43,14 +43,21 @@ export async function signUpWithPassword(
 ): Promise<AuthState> {
   const email = String(formData.get("email") ?? "").trim()
   const password = String(formData.get("password") ?? "")
+  const firstname = String(formData.get("firstname") ?? "").trim()
+  const lastname = String(formData.get("lastname") ?? "").trim()
   const next = safeNext(formData.get("next"))
 
+  if (!firstname) {
+    return { error: "Ton prénom est requis." }
+  }
   if (!email || !password) {
     return { error: "Email et mot de passe sont requis." }
   }
   if (password.length < 8) {
     return { error: "Le mot de passe doit faire au moins 8 caractères." }
   }
+
+  const fullName = [firstname, lastname].filter(Boolean).join(" ")
 
   const supabase = await createClient()
   const origin = (await headers()).get("origin") ?? ""
@@ -59,6 +66,7 @@ export async function signUpWithPassword(
     password,
     options: {
       emailRedirectTo: `${origin}/auth/callback?next=${encodeURIComponent(next)}`,
+      data: { firstname, lastname, full_name: fullName },
     },
   })
 

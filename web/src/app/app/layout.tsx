@@ -22,6 +22,16 @@ export default async function AppLayout({
 
   const email = user.email ?? ""
   const metadata = user.user_metadata ?? {}
+
+  // First time here without a name (e.g. Google sign-in, or pre-onboarding
+  // accounts) -> collect it before showing the app.
+  const hasName = Boolean(
+    metadata.firstname || metadata.full_name || metadata.name
+  )
+  if (!hasName) {
+    redirect("/onboarding?next=/app")
+  }
+
   const displayName =
     (metadata.full_name as string | undefined) ??
     (metadata.name as string | undefined) ??

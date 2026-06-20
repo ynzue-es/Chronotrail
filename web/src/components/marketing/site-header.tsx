@@ -68,7 +68,7 @@ export function SiteHeader() {
             className={cn("size-9", onHero && "text-white hover:bg-white/15 hover:text-white")}
           >
             <a
-              href="https://github.com"
+              href="https://github.com/ynzue-es"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"

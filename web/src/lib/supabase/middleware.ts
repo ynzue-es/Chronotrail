@@ -39,7 +39,7 @@ export async function updateSession(request: NextRequest) {
   const user = data?.claims
 
   const { pathname } = request.nextUrl
-  const protectedPrefixes = ['/app', '/dashboard', '/settings']
+  const protectedPrefixes = ['/app', '/dashboard', '/settings', '/onboarding']
   const isProtected = protectedPrefixes.some((p) => pathname.startsWith(p))
 
   if (!user && isProtected) {
