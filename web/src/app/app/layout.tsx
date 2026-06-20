@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
+import { listCourses, countCourses } from "@/lib/supabase/courses"
 import { AppSidebar } from "@/components/app/app-sidebar"
 import { UserMenu } from "@/components/app/user-menu"
 import { MobileNav } from "@/components/app/mobile-nav"
@@ -31,11 +32,22 @@ export default async function AppLayout({
     (metadata.picture as string | undefined) ??
     null
 
+  const SIDEBAR_HISTORY_LIMIT = 12
+  const [recentCourses, totalCourses] = await Promise.all([
+    listCourses(supabase, { limit: SIDEBAR_HISTORY_LIMIT }),
+    countCourses(supabase),
+  ])
+  const history = recentCourses.map((c) => ({
+    id: c.id,
+    name: c.name,
+    is_favorite: c.is_favorite,
+  }))
+
   return (
     <div className="flex min-h-screen bg-background">
-      <aside className="hidden w-60 shrink-0 flex-col border-r border-border md:flex">
-        <div className="flex-1 overflow-y-auto">
-          <AppSidebar />
+      <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-border md:flex">
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <AppSidebar history={history} totalCourses={totalCourses} />
         </div>
         <UserMenu
           email={email}
@@ -51,6 +63,8 @@ export default async function AppLayout({
               email={email}
               avatarUrl={avatarUrl}
               displayName={displayName || null}
+              history={history}
+              totalCourses={totalCourses}
             />
           </div>
           <div className="flex-1" />

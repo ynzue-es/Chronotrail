@@ -10,11 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { StravaIcon } from "@/components/marketing/icons/strava-icon"
 import { GoogleIcon } from "@/components/marketing/icons/google-icon"
 
 export const metadata = {
-  title: "Paramètres — Chronotrail",
+  title: "Paramètres · Chronotrail",
 }
 
 export default async function SettingsPage() {
@@ -29,8 +28,6 @@ export default async function SettingsPage() {
   const lastName = (metadata.lastname as string | undefined) ?? ""
 
   const providers = (user?.app_metadata?.providers as string[] | undefined) ?? []
-  const hasStrava =
-    metadata.provider === "strava" || providers.includes("strava")
   const hasGoogle = providers.includes("google")
 
   return (
@@ -100,11 +97,6 @@ export default async function SettingsPage() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-2">
-              <ConnectionRow
-                icon={<StravaIcon />}
-                label="Strava"
-                connected={hasStrava}
-              />
               <ConnectionRow
                 icon={<GoogleIcon />}
                 label="Google"

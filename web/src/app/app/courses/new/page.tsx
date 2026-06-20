@@ -1,8 +1,5 @@
-import { UploadSimpleIcon } from "@phosphor-icons/react/dist/ssr"
 import { PageHeader } from "@/components/app/page-header"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { GpxUploadForm } from "@/components/courses/gpx-upload-form"
 import {
   Card,
   CardContent,
@@ -10,12 +7,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { createClient } from "@/lib/supabase/server"
+import { listFitnessActivities } from "@/lib/supabase/fitness"
+import { computeProfilePace } from "@/lib/fitness"
 
 export const metadata = {
-  title: "Nouvelle prédiction — Chronotrail",
+  title: "Nouvelle prédiction · Chronotrail",
 }
 
-export default function NewCoursePage() {
+export default async function NewCoursePage() {
+  const supabase = await createClient()
+  const activities = await listFitnessActivities(supabase)
+  const profilePace = computeProfilePace(activities)
   return (
     <>
       <PageHeader
@@ -33,39 +36,7 @@ export default function NewCoursePage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="name">Nom de la course</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="Ex. UTMB 2026"
-                  required
-                />
-              </div>
-
-              <div className="flex flex-col gap-2">
-                <Label htmlFor="gpx">Fichier GPX</Label>
-                <Input
-                  id="gpx"
-                  name="gpx"
-                  type="file"
-                  accept=".gpx,application/gpx+xml"
-                  required
-                />
-              </div>
-
-              <div className="flex items-center gap-2 pt-2">
-                <Button type="submit" disabled>
-                  <UploadSimpleIcon size={14} weight="bold" />
-                  Analyser
-                </Button>
-                <p className="text-xs text-muted-foreground">
-                  Bientôt disponible — le pipeline de prédiction est en cours
-                  de branchement.
-                </p>
-              </div>
-            </form>
+            <GpxUploadForm profilePaceSec={profilePace ?? undefined} />
           </CardContent>
         </Card>
       </div>

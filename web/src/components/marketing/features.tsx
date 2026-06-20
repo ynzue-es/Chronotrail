@@ -10,21 +10,21 @@ import {
 const FEATURES = [
   {
     icon: <PathIcon size={22} weight="duotone" />,
-    title: "Prédiction km-effort",
+    title: "Prédiction ajustée à la pente",
     description:
-      "Modèle transparent popularisé par l'UTMB. Chaque 100 m de D+ compte comme 1 km de plat.",
+      "Chaque montée et descente ajuste ton allure (modèle de coût énergétique), pour un chrono réaliste, pas une simple moyenne.",
   },
   {
     icon: <LightningIcon size={22} weight="duotone" />,
-    title: "Connexion Strava",
+    title: "Calibration sur tes vraies courses",
     description:
-      "Importe tes activités pour calibrer le modèle sur ton historique réel.",
+      "Importe une course passée (export GPX Strava, Garmin…) : on déduit ton allure réelle et tes prédictions deviennent perso.",
   },
   {
     icon: <AppleLogoIcon size={22} weight="duotone" />,
     title: "Nutrition personnalisée",
     description:
-      "Calories par heure, gels, sels, eau — adaptés à ton poids, ton effort et tes tolérances.",
+      "Calories par heure, gels, sels, eau, adaptés à ton poids, ton effort et tes tolérances.",
   },
   {
     icon: <ChartLineIcon size={22} weight="duotone" />,

@@ -33,7 +33,7 @@
 :root {
   --radius: 0.625rem;
 
-  /* Light — outdoor épuré, papier + forêt */
+  /* Light, outdoor épuré, papier + forêt */
   --background: oklch(0.985 0.005 95);        /* blanc cassé chaud #FAFAF7 */
   --foreground: oklch(0.18 0.02 150);         /* vert très sombre #0F1F15 */
 
@@ -61,7 +61,7 @@
 }
 
 .dark {
-  /* Dark — nuit en forêt */
+  /* Dark, nuit en forêt */
   --background: oklch(0.16 0.015 150);        /* vert nuit */
   --foreground: oklch(0.95 0.01 95);
 

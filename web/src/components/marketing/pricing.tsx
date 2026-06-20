@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 
 const INCLUDED = [
   "Prédictions de temps illimitées",
-  "Connexion Strava",
+  "Calibration depuis tes courses (GPX)",
   "Plan nutrition personnalisé",
   "Historique complet",
   "Export des plans de course",

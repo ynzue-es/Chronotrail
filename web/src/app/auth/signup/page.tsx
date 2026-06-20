@@ -2,7 +2,7 @@ import { AuthLayout } from "@/components/auth/auth-layout"
 import { SignupForm } from "@/components/auth/signup-form"
 
 export const metadata = {
-  title: "Créer un compte — Chronotrail",
+  title: "Créer un compte · Chronotrail",
   description: "Crée ton compte Chronotrail",
 }
 

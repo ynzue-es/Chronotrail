@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/marketing/site-footer"
 import { Hero } from "@/components/marketing/hero"
 import { HowItWorks } from "@/components/marketing/how-it-works"
 import { Features } from "@/components/marketing/features"
+import { StravaNote } from "@/components/marketing/strava-note"
 import { Pricing } from "@/components/marketing/pricing"
 
 export default function LandingPage() {
@@ -13,6 +14,7 @@ export default function LandingPage() {
         <Hero />
         <HowItWorks />
         <Features />
+        <StravaNote />
         <Pricing />
       </main>
       <SiteFooter />

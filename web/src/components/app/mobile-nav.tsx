@@ -11,9 +11,15 @@ type MobileNavProps = {
   email: string
   avatarUrl?: string | null
   displayName?: string | null
+  history?: { id: string; name: string; is_favorite: boolean }[]
+  totalCourses?: number
 }
 
-export function MobileNav(props: MobileNavProps) {
+export function MobileNav({
+  history = [],
+  totalCourses,
+  ...userProps
+}: MobileNavProps) {
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -35,10 +41,10 @@ export function MobileNav(props: MobileNavProps) {
               </Button>
             </Dialog.Close>
           </div>
-          <div className="flex-1 overflow-y-auto">
-            <AppSidebar />
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <AppSidebar history={history} totalCourses={totalCourses} />
           </div>
-          <UserMenu {...props} />
+          <UserMenu {...userProps} />
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

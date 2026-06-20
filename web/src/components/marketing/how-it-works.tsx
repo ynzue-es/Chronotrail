@@ -10,7 +10,7 @@ const STEPS = [
     icon: <UploadSimpleIcon size={22} weight="duotone" />,
     title: "Dépose ton GPX",
     description:
-      "Glisse ton fichier GPX ou importe directement depuis Strava. On analyse distance, dénivelé et technicité.",
+      "Glisse le GPX de ton parcours (export Strava, Garmin ou ta montre). On analyse distance, dénivelé et technicité.",
   },
   {
     number: "02",
@@ -24,7 +24,7 @@ const STEPS = [
     icon: <ChartLineIcon size={22} weight="duotone" />,
     title: "Reçois ton plan",
     description:
-      "Temps prédit, splits km par km, plan nutrition et hydratation — tout prêt pour le jour J.",
+      "Temps prédit, splits km par km, plan nutrition et hydratation, tout prêt pour le jour J.",
   },
 ]
 

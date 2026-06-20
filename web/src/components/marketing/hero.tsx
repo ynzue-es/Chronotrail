@@ -1,8 +1,6 @@
-import { PlayIcon } from "@phosphor-icons/react/dist/ssr"
+import { PlayIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr"
 import { Button } from "@/components/ui/button"
 import { DashboardMockup } from "./dashboard-mockup"
-import { StravaIcon } from "./icons/strava-icon"
-import { GoogleIcon } from "./icons/google-icon"
 
 export function Hero() {
   return (
@@ -13,7 +11,7 @@ export function Hero() {
         <div>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/80 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
             <span className="size-1.5 rounded-full bg-primary" />
-            V1 — Beta publique
+            V1 · Beta publique
           </div>
 
           <h1 className="mb-6 text-balance text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
@@ -27,21 +25,14 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button
-              size="lg"
-              className="bg-[#FC4C02] text-white hover:bg-[#e04400]"
-              asChild
-            >
-              <a href="/auth/strava">
-                <StravaIcon />
-                Connexion avec Strava
+            <Button size="lg" asChild>
+              <a href="/auth/signup">
+                Commencer gratuitement
+                <ArrowRightIcon size={16} weight="bold" />
               </a>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <a href="/auth/google">
-                <GoogleIcon />
-                Continuer avec Google
-              </a>
+              <a href="/auth/login">J&apos;ai déjà un compte</a>
             </Button>
           </div>
 

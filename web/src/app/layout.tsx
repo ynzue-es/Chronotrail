@@ -13,10 +13,52 @@ const mono = JetBrains_Mono({
   subsets: ["latin"],
 })
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+
 export const metadata: Metadata = {
-  title: "Chronotrail — Ton chrono de trail, avant la course",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Chronotrail · Ton chrono de trail, avant la course",
+    template: "%s · Chronotrail",
+  },
   description:
-    "Prédis ton temps de trail à partir d'un fichier GPX. Simple, gratuit, open-source.",
+    "Prédis ton temps de trail à partir d'un fichier GPX : chrono estimé ajusté à la pente, splits par km, segments marquants et plan de nutrition. Simple, gratuit, open-source.",
+  applicationName: "Chronotrail",
+  keywords: [
+    "trail",
+    "prédiction temps trail",
+    "estimation chrono trail",
+    "GPX",
+    "splits",
+    "dénivelé",
+    "nutrition course",
+    "hydratation trail",
+    "ultra-trail",
+    "pacing",
+  ],
+  authors: [{ name: "Chronotrail" }],
+  creator: "Chronotrail",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "/",
+    siteName: "Chronotrail",
+    title: "Chronotrail · Ton chrono de trail, avant la course",
+    description:
+      "Importe un GPX et obtiens ton temps estimé ajusté à la pente, tes splits par km et ton plan de nutrition.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Chronotrail · Ton chrono de trail, avant la course",
+    description:
+      "Importe un GPX et obtiens ton temps estimé ajusté à la pente, tes splits par km et ton plan de nutrition.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
 }
 
 export default function RootLayout({
