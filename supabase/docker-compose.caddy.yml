@@ -1,9 +1,37 @@
+# Production override: Caddy TLS reverse proxy + the Next.js web app.
+#
+# Usage:
+#   docker compose -f docker-compose.yml -f docker-compose.caddy.yml up -d --build
+#
+# Caddy terminates TLS for chronotrail.fr (web) and api.chronotrail.fr (kong).
+# Kong no longer publishes host ports — it is reached internally by Caddy.
+
 services:
 
   kong:
     ports: !reset []
     environment:
       KONG_PORT_MAPS: "443:8000,443:8443"
+
+  web:
+    container_name: chronotrail-web
+    build:
+      context: ../web
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+        NEXT_PUBLIC_SITE_URL: ${SITE_URL}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_SUPABASE_URL: ${SUPABASE_PUBLIC_URL}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${ANON_KEY}
+      NEXT_PUBLIC_SITE_URL: ${SITE_URL}
+      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+    depends_on:
+      kong:
+        condition: service_healthy
 
   caddy:
     container_name: supabase-caddy
@@ -16,18 +44,8 @@ services:
     depends_on:
       kong:
         condition: service_healthy
-      studio:
-        condition: service_healthy
-    environment:
-      PROXY_DOMAIN: ${PROXY_DOMAIN}
-      PROXY_AUTH_USERNAME: ${DASHBOARD_USERNAME}
-      PROXY_AUTH_PASSWORD: ${DASHBOARD_PASSWORD}
-    command:
-      - /bin/sh
-      - -c
-      - |
-        PROXY_AUTH_PASSWORD=$$(caddy hash-password --plaintext "$$PROXY_AUTH_PASSWORD") && \
-        caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
+      web:
+        condition: service_started
     volumes:
       - ./volumes/proxy/caddy:/etc/caddy
       - caddy_data:/data

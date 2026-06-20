@@ -83,6 +83,7 @@ services:
 
       GOTRUE_SITE_URL: ${SITE_URL}
       GOTRUE_URI_ALLOW_LIST: ${ADDITIONAL_REDIRECT_URLS}
+      GOTRUE_MAILER_EXTERNAL_HOSTS: ${PROXY_DOMAIN},api.${PROXY_DOMAIN}
       GOTRUE_DISABLE_SIGNUP: ${DISABLE_SIGNUP}
 
       GOTRUE_JWT_ADMIN_ROLES: service_role
@@ -226,6 +227,8 @@ services:
       - ./volumes/db/roles.sql:/docker-entrypoint-initdb.d/init-scripts/99-roles.sql:Z
       # Initialize the database settings with JWT_SECRET and JWT_EXP
       - ./volumes/db/jwt.sql:/docker-entrypoint-initdb.d/init-scripts/99-jwt.sql:Z
+      # Hand auth schema ownership to supabase_auth_admin so GoTrue migrations run
+      - ./volumes/db/init-auth-owner.sql:/docker-entrypoint-initdb.d/init-scripts/99-auth-owner.sql:Z
       # PGDATA directory is persisted between restarts
       - ./volumes/db/data:/var/lib/postgresql/data:Z
       # Use named volume to persist pgsodium decryption key between restarts
