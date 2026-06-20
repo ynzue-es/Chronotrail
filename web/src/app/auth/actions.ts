@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { headers } from "next/headers"
+import { SITE_URL } from "@/lib/site-url"
 
 export type AuthState = {
   error?: string
@@ -60,12 +60,11 @@ export async function signUpWithPassword(
   const fullName = [firstname, lastname].filter(Boolean).join(" ")
 
   const supabase = await createClient()
-  const origin = (await headers()).get("origin") ?? ""
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: `${origin}/auth/callback?next=${encodeURIComponent(next)}`,
+      emailRedirectTo: `${SITE_URL}/auth/callback?next=${encodeURIComponent(next)}`,
       data: { firstname, lastname, full_name: fullName },
     },
   })

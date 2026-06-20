@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server"
 import { createClient } from "@/lib/supabase/server"
+import { siteUrl } from "@/lib/site-url"
 
 function safeNext(next: string | null): string {
   if (!next) return "/app"
@@ -8,19 +9,19 @@ function safeNext(next: string | null): string {
 }
 
 export async function GET(request: NextRequest) {
-  const { searchParams, origin } = request.nextUrl
+  const { searchParams } = request.nextUrl
   const code = searchParams.get("code")
   const next = safeNext(searchParams.get("next"))
   const error = searchParams.get("error_description") ?? searchParams.get("error")
 
   if (error) {
     return NextResponse.redirect(
-      `${origin}/auth/login?error=${encodeURIComponent(error)}`
+      siteUrl(`/auth/login?error=${encodeURIComponent(error)}`)
     )
   }
 
   if (!code) {
-    return NextResponse.redirect(`${origin}/auth/login?error=missing_code`)
+    return NextResponse.redirect(siteUrl("/auth/login?error=missing_code"))
   }
 
   const supabase = await createClient()
@@ -28,9 +29,9 @@ export async function GET(request: NextRequest) {
 
   if (exchangeError) {
     return NextResponse.redirect(
-      `${origin}/auth/login?error=${encodeURIComponent(exchangeError.message)}`
+      siteUrl(`/auth/login?error=${encodeURIComponent(exchangeError.message)}`)
     )
   }
 
-  return NextResponse.redirect(`${origin}${next}`)
+  return NextResponse.redirect(siteUrl(next))
 }
