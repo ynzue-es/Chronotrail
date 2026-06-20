@@ -1,18 +1,18 @@
-{$PROXY_DOMAIN} {
-    @supabase_api path /auth/v1/* /rest/v1/* /graphql/v1 /realtime/v1/* /storage/v1/* /functions/v1/* /mcp /sso/*
+# Chronotrail production reverse proxy.
+# Caddy terminates TLS (auto Let's Encrypt) and routes:
+#   chronotrail.fr      -> Next.js web app  (web:3000)
+#   api.chronotrail.fr  -> Supabase gateway (kong:8000)
 
-    handle @supabase_api {
-        reverse_proxy kong:8000
-    }
+# --- Web app (apex) ---
+chronotrail.fr {
+    encode zstd gzip
+    reverse_proxy web:3000
+    header -server
+}
 
-    handle {
-        basic_auth {
-            # PROXY_AUTH_PASSWORD is overwritten with the bcrypt on startup
-            {$PROXY_AUTH_USERNAME} {$PROXY_AUTH_PASSWORD}
-        }
-
-        reverse_proxy studio:3000
-    }
-
+# --- Supabase API ---
+api.chronotrail.fr {
+    encode zstd gzip
+    reverse_proxy kong:8000
     header -server
 }
