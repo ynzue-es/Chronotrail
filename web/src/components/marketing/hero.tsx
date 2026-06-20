@@ -1,6 +1,6 @@
 "use client"
 
-import { PlayIcon, ArrowRightIcon } from "@phosphor-icons/react/dist/ssr"
+import { ArrowRightIcon } from "@phosphor-icons/react/dist/ssr"
 import { motion, useReducedMotion, type Variants } from "motion/react"
 import { Button } from "@/components/ui/button"
 
@@ -45,7 +45,8 @@ export function Hero() {
         {/* Scrims: left for text contrast, top for header, bottom to blend into page */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/20" />
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/50 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
+        {/* Tall, eased fade so the dark photo melts smoothly into the page */}
+        <div className="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-background via-background/80 via-30% to-transparent" />
       </div>
 
       <div className="relative mx-auto w-full max-w-6xl px-6 py-28 md:py-32">
@@ -72,7 +73,9 @@ export function Hero() {
             className="mb-6 text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-white drop-shadow-sm md:text-6xl lg:text-7xl"
           >
             Ton chrono de trail,{" "}
-            <span className="text-primary-foreground/95">avant la course.</span>
+            {/* Fixed luminous green: the hero photo is dark in both themes,
+                so the accent must not flip with the color scheme. */}
+            <span className="text-[oklch(0.82_0.13_152)]">avant la course.</span>
           </motion.h1>
 
           <motion.p
@@ -99,16 +102,6 @@ export function Hero() {
             >
               <a href="/auth/login">J&apos;ai déjà un compte</a>
             </Button>
-          </motion.div>
-
-          <motion.div
-            variants={item}
-            className="mt-6 flex items-center gap-2 text-sm text-white/70"
-          >
-            <PlayIcon size={14} weight="fill" className="text-primary" />
-            <a href="#preview" className="transition-colors hover:text-white">
-              Ou essaie avec un exemple, sans compte
-            </a>
           </motion.div>
         </motion.div>
       </div>
