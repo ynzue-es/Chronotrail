@@ -27,10 +27,11 @@ export async function completeOnboarding(
 
   // Reference flat pace (optional). Stored at the user level so it pre-fills
   // future course predictions instead of being asked again each time.
-  const metadata: Record<string, string | number> = {
+  const metadata: Record<string, string | number | boolean> = {
     firstname,
     lastname,
     full_name: [firstname, lastname].filter(Boolean).join(" "),
+    onboarded: true,
   }
   if (paceRaw) {
     const sec = parsePace(paceRaw)

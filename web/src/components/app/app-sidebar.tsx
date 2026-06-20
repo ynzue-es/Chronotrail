@@ -10,6 +10,7 @@ import {
   StarIcon,
   GaugeIcon,
   GameControllerIcon,
+  ShieldCheckIcon,
 } from "@phosphor-icons/react"
 import { cn } from "@/lib/utils"
 import { Logo } from "@/components/brand/logo"
@@ -40,13 +41,18 @@ const items: NavItem[] = [
 export function AppSidebar({
   history = [],
   totalCourses,
+  isAdmin = false,
 }: {
   history?: HistoryItem[]
   totalCourses?: number
+  isAdmin?: boolean
 }) {
   const pathname = usePathname()
   const total = totalCourses ?? history.length
   const hasMore = total > history.length
+  const navItems = isAdmin
+    ? [...items, { href: "/app/admin", label: "Admin", icon: ShieldCheckIcon }]
+    : items
 
   return (
     <nav className="flex flex-col gap-1 p-3">
@@ -59,7 +65,7 @@ export function AppSidebar({
       </Link>
 
       <div className="flex flex-col gap-0.5">
-        {items.map((item) => {
+        {navItems.map((item) => {
           const active = item.exact
             ? pathname === item.href
             : pathname.startsWith(item.href)

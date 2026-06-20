@@ -32,8 +32,7 @@ export default async function OnboardingPage({ searchParams }: PageProps) {
   }
 
   const m = (user.user_metadata ?? {}) as Record<string, string | undefined>
-  const hasName = Boolean(m.firstname || m.full_name || m.name)
-  if (hasName) {
+  if (m.onboarded) {
     redirect(next)
   }
 

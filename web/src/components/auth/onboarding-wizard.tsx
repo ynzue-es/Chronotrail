@@ -2,8 +2,6 @@
 
 import { useActionState, useState } from "react"
 import {
-  MountainsIcon,
-  PathIcon,
   TimerIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
@@ -93,7 +91,7 @@ export function OnboardingWizard({
           >
             {step === 0 && (
               <Intro
-                icon={<MountainsIcon size={26} weight="duotone" />}
+                image="/images/hero-mountains.jpg"
                 title="Bienvenue sur Chronotrail 👋"
                 text="Chronotrail prédit ton temps de trail à partir d'un simple fichier GPX : chrono estimé, splits km par km et plan nutrition. Gratuit et sans boîte noire."
               />
@@ -101,7 +99,7 @@ export function OnboardingWizard({
 
             {step === 1 && (
               <Intro
-                icon={<PathIcon size={26} weight="duotone" />}
+                image="/images/onboard-summit.jpg"
                 title="Le principe : le km-effort"
                 text="Chaque 100 m de dénivelé positif équivaut à ~1 km de plat. On ajuste ton allure à chaque montée et descente pour un chrono réaliste, pas une simple moyenne."
               />
@@ -167,8 +165,20 @@ export function OnboardingWizard({
 
             {step === 3 && (
               <div className="flex flex-col items-center gap-4 text-center">
-                <Badge icon={<CheckCircleIcon size={26} weight="duotone" />} />
-                <h2 className="text-xl font-semibold tracking-tight">
+                <div className="w-full overflow-hidden rounded-xl">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/trail-runners.jpg"
+                    alt="Traileurs sur un sentier de montagne"
+                    className="h-32 w-full object-cover"
+                  />
+                </div>
+                <h2 className="flex items-center gap-2 text-xl font-semibold tracking-tight">
+                  <CheckCircleIcon
+                    size={20}
+                    weight="fill"
+                    className="text-primary"
+                  />
                   Tout est prêt{firstname ? `, ${firstname}` : ""} 🎉
                 </h2>
                 <p className="text-sm text-muted-foreground">
@@ -239,17 +249,20 @@ export function OnboardingWizard({
 }
 
 function Intro({
-  icon,
+  image,
   title,
   text,
 }: {
-  icon: React.ReactNode
+  image: string
   title: string
   text: string
 }) {
   return (
-    <div className="flex flex-col items-center gap-4 text-center">
-      <Badge icon={icon} />
+    <div className="flex flex-col gap-4 text-center">
+      <div className="overflow-hidden rounded-xl">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={image} alt="" className="h-36 w-full object-cover" />
+      </div>
       <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
       <p className="text-sm leading-relaxed text-muted-foreground">{text}</p>
     </div>

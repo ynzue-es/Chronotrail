@@ -1,10 +1,12 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { listCourses, countCourses } from "@/lib/supabase/courses"
+import { isAdminEmail } from "@/lib/admin"
 import { AppSidebar } from "@/components/app/app-sidebar"
 import { UserMenu } from "@/components/app/user-menu"
 import { MobileNav } from "@/components/app/mobile-nav"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { Heartbeat } from "@/components/app/heartbeat"
 
 export default async function AppLayout({
   children,
@@ -22,13 +24,11 @@ export default async function AppLayout({
 
   const email = user.email ?? ""
   const metadata = user.user_metadata ?? {}
+  const admin = isAdminEmail(email)
 
-  // First time here without a name (e.g. Google sign-in, or pre-onboarding
-  // accounts) -> collect it before showing the app.
-  const hasName = Boolean(
-    metadata.firstname || metadata.full_name || metadata.name
-  )
-  if (!hasName) {
+  // Show the onboarding wizard until the user has completed it (flag stored in
+  // user_metadata). Catches new signups and Google sign-ins alike.
+  if (!metadata.onboarded) {
     redirect("/onboarding?next=/app")
   }
 
@@ -55,9 +55,10 @@ export default async function AppLayout({
 
   return (
     <div className="flex min-h-screen bg-background">
+      <Heartbeat />
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-border md:flex">
         <div className="min-h-0 flex-1 overflow-y-auto">
-          <AppSidebar history={history} totalCourses={totalCourses} />
+          <AppSidebar history={history} totalCourses={totalCourses} isAdmin={admin} />
         </div>
         <UserMenu
           email={email}
