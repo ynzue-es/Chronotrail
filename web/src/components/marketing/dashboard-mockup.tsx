@@ -1,6 +1,10 @@
+"use client"
+
 import { AppleLogoIcon } from "@phosphor-icons/react/dist/ssr"
+import { motion, useReducedMotion } from "motion/react"
 
 export function DashboardMockup() {
+  const reduce = useReducedMotion()
   return (
     <div className="relative rounded-2xl border border-border bg-card p-5 shadow-xl shadow-primary/5 md:p-6">
       <div className="mb-5 flex items-start justify-between">
@@ -49,16 +53,25 @@ export function DashboardMockup() {
               <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
             </linearGradient>
           </defs>
-          <path
+          <motion.path
             d="M0,60 L15,45 L30,30 L45,20 L60,35 L75,15 L95,25 L115,10 L135,20 L155,5 L180,25 L205,15 L230,35 L255,25 L280,40 L300,55 L300,70 L0,70 Z"
             fill="url(#elevGrad)"
+            initial={reduce ? { opacity: 1 } : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 1 }}
           />
-          <path
+          <motion.path
             d="M0,60 L15,45 L30,30 L45,20 L60,35 L75,15 L95,25 L115,10 L135,20 L155,5 L180,25 L205,15 L230,35 L255,25 L280,40 L300,55"
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
             strokeLinejoin="round"
+            strokeLinecap="round"
+            initial={reduce ? { pathLength: 1 } : { pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.8, ease: "easeInOut", delay: 0.6 }}
           />
         </svg>
       </div>

@@ -3,6 +3,7 @@ import {
   TimerIcon,
   ChartLineIcon,
 } from "@phosphor-icons/react/dist/ssr"
+import { Reveal, RevealStagger, RevealItem } from "@/components/motion/reveal"
 
 const STEPS = [
   {
@@ -32,7 +33,7 @@ export function HowItWorks() {
   return (
     <section id="how" className="border-t border-border/40 bg-muted/30">
       <div className="mx-auto max-w-5xl px-6 py-20 md:py-24">
-        <div className="mb-12 text-center">
+        <Reveal className="mb-12 text-center">
           <h2 className="mb-3 text-3xl font-semibold tracking-tight md:text-4xl">
             En 3 étapes, avant ta prochaine course.
           </h2>
@@ -40,13 +41,15 @@ export function HowItWorks() {
             Chronotrail analyse ton parcours, calcule ton temps prévu et te
             prépare un plan complet.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid gap-8 md:grid-cols-3">
+        <RevealStagger className="grid gap-8 md:grid-cols-3">
           {STEPS.map((step) => (
-            <Step key={step.number} {...step} />
+            <RevealItem key={step.number}>
+              <Step {...step} />
+            </RevealItem>
           ))}
-        </div>
+        </RevealStagger>
       </div>
     </section>
   )
